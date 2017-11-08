@@ -243,6 +243,34 @@ function intersectSort(arr1, arr2) {
     }
     return newAray;
 }
+
+//Intersection with duplicating values...cannot use new array must modify existing array
+
+function intersectSortDuplicates (arr1, arr2) {
+    let i = 0; 
+    while (i != arr1.length) {
+        let z = 0; 
+        var cond = false; 
+        while ( z != arr2.length) {
+            if (arr1[i] == arr2[z]) {
+                arr2.splice(z, 1);
+                cond = true;
+                break;
+            }
+            z++;
+        }
+        if (!cond) {
+            arr1.splice(i, 1);
+        }
+        else {
+            i++; 
+        }
+    }
+    return arr1; 
+}
+// intersectSortDuplicates([1,2,2,7,1, 2, 11], [2,7,3,2,11]); expected output=> [2,2,7,11]
+
+
 //*****************************************************************END of Optimization******************************************************
 
         </script>
