@@ -271,8 +271,124 @@ function intersectSortDuplicates (arr1, arr2) {
 // intersectSortDuplicates([1,2,2,7,1, 2, 11], [2,7,3,2,11]); expected output=> [2,2,7,11]
 
 
+//Heaps --> Binary Tree Organized by having the lowest values at the top of the tree. Parent is not allowed to have a value less than the child node
+//each new value must enter at the leftmost bottom => represented in an array that is the end of the array
+//parent is always the index divided by 2 (index / 2). Left child is 2 * index, right child is (2 * index) + 1;
+function Heap() {
+    this.arr = [null]; //index 0 of array must be null
+}
+
+function add (val) {  
+    arr.push(val); //leftmost bottom will always be at the very end of the array 
+    var current = arr.length - 1; //index of added value
+    var parent = Math.floor(current / 2); //index of parent of added value 
+    while (arr[current] < arr[parent]) { //continual check 
+      var temp = arr[current]; //lines 287-289 swap the values of parent and child in the scenario that the parent is lesser value
+      arr[current] = arr[parent];
+      arr[parent] = temp;
+      current = parent; //resets the new index of added value 
+      parent = Math.floor(current / 2); //resets index of the new parent 
+    }
+    return arr;
+  }
+
+  function HashMap (cap) {
+      this.capacity = cap;
+      this.table = [];
+  }
+
+  //inherits hashCode and mod methods which produce index value for array  
+  hashMap.prototype.hashAdd = function (key, val) {
+      var rand = key.hashCode();
+      var idx = mode(rand, this.capacity);
+      if (this.table[idx]){
+          for (var i = 0; i < this.table[idx].length; i++) { //deal with scenario in order to avoid a hash collision 
+              if (this.table[idx][i][0] == key) {
+                  this.table[idx][i][1] = val;
+                  return
+              }
+          }
+        this.table[idx].push([key, val]);
+      }
+      else {
+          this.table[idx] = [key, val];
+      }
+  }
+
+  //print only the keys in the hashtable
+hashMap.prototype.hashPrint = function () {
+    for (var i = 0; i < this.table.length - 1; i++) {
+        if (this.table[i].length > 2) { //if an index contains multiple arrays then we need another loop
+            for (var x = 0; x < this.table[i].length - 1; x++) {
+                console.log(this.table[i][x][0]);
+            }
+        }
+        console.log(this.table[i][0])
+    }
+}
+//grow capacity by 50% and re-hash the values 
+hashMap.prototype.grow = function () {
+    var half = Math.floor(this.capacity / 2); //need half of the length 
+    this.capacity += half; //add the to original capacity so if it was 10 now its 15 if 20 now 30 
+    for (let i = 0; i < this.table.length - 1; i++) {
+        for (let x = 0; x < this.table.length[i] - 1; x++ ) {
+            let temp = this.table[i][x]; //store array in temp in order to save it and re-hash
+            temp.splice(x,1); //must splice array out in order to re-hash 
+            this.hashAdd(temp[0], temp[1]); //calls previous hashAdd method which takes a key, value as its parameter 
+        }
+    }
+
+}
+
 //*****************************************************************END of Optimization******************************************************
 
-        </script>
-    </body>
-</html>
+//next largest number including all the same digits
+//so 23 = 32; 293 = 329; 59884848459853 = 59884848483559;
+//find the pivot digit swap the pivot with the smallest value to the right of the pivot that is still greater than the pivot itself
+
+function nextLargest(num) {
+    function nextBigger(num){
+        var arr = num.toString().split(''); //data type conversion in order to loop through arr, JS will still evaluate "3" > "2"
+        console.log(arr);
+        
+        // find the pivot, the point (from right so that we search for the smallest available pivot point)
+        var pivot = -1;
+        for (var i = arr.length-1; i > 0; i--) {
+          if (+arr[i] > +arr[i-1]) {
+            pivot = i-1;
+            break;
+          }
+        }
+        
+        if (pivot == -1) return pivot; // if we are unable to find the pivot, skip
+        
+        var right = arr.splice(pivot); // splice the digits in the pivot
+        var temp = right.splice(0, 1)[0]; // extract pivot
+        
+        // find the lowest number > pv
+        var min = null, mmi = null;
+        for (var i = 0; i < right.length; i++) {
+          if (right[i] > temp) {
+            if (min == null || right[i] < min) {
+              min = right[i];
+              mmi = i;
+            }
+          }
+        }
+      
+        if (mmi == null) return -1;
+        
+        right.splice(mmi, 1);
+        right.push(temp);
+        right = right.sort(); //everything in right must be resorted going from lowest values in front to highest values in the back
+        
+        // concat the left + new pivot + right part
+        var ret = +arr.concat([min]).concat(right).join('');
+        if (ret == num) return -1; //if the number is already in its highest form and cannot be increaed (example 321); simply return -1.
+        
+        return ret;
+    }
+      nextBigger(59884848459853);
+
+
+}
