@@ -36,6 +36,46 @@
                 return isBalanced(node.left) && isBalanced(node.right); //recursive call with evaluate left side first, bubble back up n go right
             }
 
+//height 
+            function height(node) {
+                if (node == null) { return 0 };
+                let left = height(node.left);
+                let right = height(node.right);
+                if (left > right ) {
+                    return left + 1;
+                }
+                else { 
+                    return right + 1 
+                }
+            }
+//checks if BST is full 
+
+            function isFull(BST) {
+                let height = height(BST.root) //helper function
+                let size = size(BST.root); 
+                if (Math.sqrt(size - 1) == height) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+//isComplete
+
+            function isComplete (node) {
+                if (node == null) {
+                    return true;
+                } else if (node.right == null && node.left == null) {
+                    return true;
+                } else if (node.right != null && node.left) {
+                    return false;
+                } else if (node.left && node.right) {
+                    return (this.isComplete(node.left && this.isComplete(node.right) && (this.height(node.left) >= (this.height(node.right)))));
+                } else if (node.left && node.right != null) {
+                    return (this.isComplete(node.left));
+                }
+            }
+
 //looks for a value in BST, finds value and removes it from tree while re-balancing deleted node with the leftmost node of the right subtree 
             function deleteValue(val) {
                 if (!root) return false; 
@@ -65,6 +105,7 @@
                     }
                 }
             }
+
 
             function rValid(Min, Max, node) {
                 if(!node) return true; 
@@ -340,7 +381,7 @@ hashMap.prototype.grow = function () {
 
 }
 
-//*****************************************************************END of Optimization******************************************************
+//*****************************************************************END of Sorts******************************************************
 
 //next largest number including all the same digits
 //so 23 = 32; 293 = 329; 59884848459853 = 59884848483559;
@@ -391,4 +432,15 @@ function nextLargest(num) {
       nextBigger(59884848459853);
 
 
+}
+
+//reverse array
+
+function reverse (arr) {
+    for (var i = 0; i < arr.length - 1; i++) {
+        var temp = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = temp; 
+    }
+    return arr;
 }
