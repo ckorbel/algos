@@ -465,3 +465,18 @@ function getChange (amount) {
     }
     return (numQuarters, numDimes, numNickels, numPennies);
   } 
+
+
+function getDuplicate (arr) {  //identify the first duplicate 
+    var dict = {}; //create an empty hash table/dictionary add key-value pairs
+    for (var i = 0; i < arr.length; i++) {
+      if (dict[arr[i]] > 0) { //first key with value greater than 1 is a duplicate
+        return arr[i];
+      }
+      else {
+        dict[arr[i]] = 1; //intialize at value of 1 
+      }
+    }
+    return "No duplicates"; //if the loops runs out and no duplicates are found
+  }
+  getDuplicate(["a","b","c","d","a"]);
