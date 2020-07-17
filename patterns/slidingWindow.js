@@ -26,3 +26,28 @@ function maxSubArrSum(arr, num) {
 }
 
 console.log(maxSubArrSum(input, 3));
+
+// sliding window gives 0(n) instead of 0(n^2)
+function longestSubString(str) {
+  let left = 0;
+  let right = 0;
+  let max = 0;
+  const duplicates = {};
+  // if you need the actual string returned as well
+  while (right < str.length) {
+    if (str[right] in duplicates) {
+      delete duplicates[str[left]];
+      left++;
+    } else {
+      duplicates[str[right]] = 1;
+      let difference = right + 1 - left;
+      if (difference > max) {
+        max = difference;
+      }
+      right++;
+    }
+  }
+  return max;
+}
+
+console.log(longestSubString("babcaccqwertyuioabccbdcccccccccc"));
