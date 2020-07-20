@@ -68,6 +68,70 @@ class LL {
     newNode.next = oldHead;
     this.length++;
   }
+
+  //get value at index
+  get(index) {
+    if (!this.head) return null;
+    if (this.length < index || index < 0) {
+      return null;
+    }
+
+    let count = 0;
+    let current = this.head;
+    while (count !== index) {
+      current = current.next;
+      count++;
+    }
+    return current;
+  }
+
+  // insert value at specific index
+  set(index, val) {
+    const foundNode = this.get(index);
+    if (!foundNode) {
+      return false;
+    }
+    foundNode.val = val;
+    return true;
+  }
+
+  // insert value and insert a new Node
+  insert(index, val) {
+    if (index > this.length || index < 0) {
+      return false;
+    }
+
+    if (index === this.length) {
+      return this.push(val);
+    }
+
+    if (index === 0) {
+      return this.unshift(val);
+    }
+
+    const newNode = new Node(val);
+    const prev = this.get(index - 1);
+    const temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    return true;
+  }
+
+  reverse() {
+    if (!this.head) return null;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
 }
 
 const newList = new LL();
