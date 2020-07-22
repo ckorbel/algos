@@ -117,18 +117,35 @@ class LL {
     return true;
   }
 
+  //just for viewing
+  print() {
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    console.log(arr);
+  }
+
   reverse() {
     if (!this.head) return null;
-    let node = this.head;
+    let current = this.head;
+
+    // swap head and tail
     this.head = this.tail;
-    this.tail = node;
-    let next;
-    let prev = null;
+    // current at tail (previously was head)
+    this.tail = current;
+    console.log(current.val);
+
+    let previous = null;
+    let next = null;
     for (let i = 0; i < this.length; i++) {
-      next = node.next;
-      node.next = prev;
-      prev = node;
-      node = next;
+      next = current.next;
+      // pointer reverses here
+      current.next = previous;
+      previous = current;
+      current = next;
     }
     return this;
   }
