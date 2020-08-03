@@ -1,9 +1,8 @@
 class Node {
   constructor(val) {
     this.val = val;
-    this.right = null;
     this.left = null;
-    this.count = 0;
+    this.right = null;
   }
 }
 
@@ -12,41 +11,38 @@ class BST {
     this.root = null;
   }
 
-  insertNode(val) {
+  insert(val) {
     const newNode = new Node(val);
-
     if (!this.root) {
       this.root = newNode;
       return this;
     }
-
     let current = this.root;
-
-    const addSide = (side) => {
-      if (!current[side]) {
-        current[side] = newNode;
-        return this;
-      }
-      current = current[side];
-    };
-
     while (true) {
-      if (val === current.val) {
-        current.count++;
-        return this;
-      }
       if (val < current.val) {
-        addSide("left");
-      } else {
-        addSide("right");
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        } else {
+          current = current.left;
+        }
+      } else if (val > current.val) {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        } else {
+          current = current.right;
+        }
       }
     }
   }
 }
 
-let tree = new BST();
-tree.insertNode(10);
-tree.insertNode(7);
-tree.insertNode(42);
-tree.insertNode(2);
-console.log(tree);
+const tree = new BST();
+tree.insert(10);
+tree.insert(5);
+tree.insert(2);
+tree.insert(13);
+tree.insert(16);
+tree.insert(7);
+console.log(tree.root.left);
