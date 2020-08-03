@@ -19,20 +19,23 @@ class BST {
     }
     let current = this.root;
     while (true) {
+      // could use count property
+      // instead we just break
+      if (val === current.val) {
+        return null;
+      }
       if (val < current.val) {
         if (current.left === null) {
           current.left = newNode;
           return this;
-        } else {
-          current = current.left;
         }
-      } else if (val > current.val) {
+        current = current.left;
+      } else {
         if (current.right === null) {
           current.right = newNode;
           return this;
-        } else {
-          current = current.right;
         }
+        current = current.right;
       }
     }
   }
