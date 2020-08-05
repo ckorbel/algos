@@ -69,13 +69,12 @@ class BST {
   bfs() {
     // linked list is better for a queue ease
     const queue = [];
-    const data = [];
+    const visited = [];
     let node = this.root;
     queue.push(node);
     while (queue.length) {
       node = queue.shift();
       data.push(node.val);
-      // same logic can work on other types of trees just need to change this property
       if (node.left) {
         queue.push(node.left);
       }
@@ -84,7 +83,69 @@ class BST {
         queue.push(node.right);
       }
     }
-    return data;
+    return visited;
+  }
+
+  // dfs Pre-Order
+  // depth first search
+  // move down til hit bottom before visiting sibling nodes
+
+  // create variable to store nodes visited
+  // store root on subtree in var called current
+  // helper function accepts the node of the var
+
+  dfsPreOrder() {
+    const visited = [];
+
+    function traverse(node) {
+      visited.push(node.val);
+      // go all the way left first before working right
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+    }
+    // initialize recursive traversal at root
+    traverse(this.root);
+    return visited;
+  }
+
+  // same methods as pre-order
+  // just visit right siblings before pushing
+  // this make root last value push in
+  dfsPostOrder() {
+    const visited = [];
+
+    function traverse(node) {
+      if (node.left) {
+        traverse(node.left);
+      }
+
+      if (node.right) {
+        traverse(node.right);
+      }
+      visited.push(node.val);
+    }
+    traverse(this.root);
+    return visited;
+  }
+
+  // would be smallest to largest value
+  dfsInOrder() {
+    const visited = [];
+    function traverse(node) {
+      if (node.left) {
+        traverse(node.left);
+      }
+      visited.push(node.val);
+      if (node.right) {
+        traverse(node.right);
+      }
+    }
+    traverse(this.root);
+    return visited;
   }
 }
 
@@ -95,5 +156,8 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(15);
 tree.insert(20);
+console.log(tree);
 // console.log(tree.search(2));
-console.log(tree.bfs());
+console.log(tree.dfsPreOrder());
+console.log(tree.dfsPostOrder());
+console.log(tree.dfsInOrder());
