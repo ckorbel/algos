@@ -63,13 +63,37 @@ class BST {
       }
     }
   }
+
+  // breadth first search
+  // traverse tree across
+  bfs() {
+    // linked list is better for a queue ease
+    const queue = [];
+    const data = [];
+    let node = this.root;
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node.val);
+      // same logic can work on other types of trees just need to change this property
+      if (node.left) {
+        queue.push(node.left);
+      }
+
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+    return data;
+  }
 }
 
 const tree = new BST();
 tree.insert(10);
-tree.insert(5);
-tree.insert(2);
-tree.insert(13);
-tree.insert(16);
-tree.insert(7);
-console.log(tree.search(2));
+tree.insert(6);
+tree.insert(3);
+tree.insert(8);
+tree.insert(15);
+tree.insert(20);
+// console.log(tree.search(2));
+console.log(tree.bfs());
