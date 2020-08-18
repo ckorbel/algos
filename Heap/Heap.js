@@ -28,12 +28,62 @@ class MaxBinaryHeap {
     this.values.push(val);
     this.bubbleUp();
   }
+
+  bubbleDown() {
+    let index = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIndex = 2 * index + 1;
+      let rightChildIndex = 2 * index + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIndex < length) {
+        leftChild = this.values[leftChildIndex];
+        if (leftChild > element) {
+          swap = leftChildIndex;
+        }
+      }
+
+      if (rightChildIndex < length) {
+        rightChild = this.values[rightChildIndex];
+        if (
+          (swap === null && rightChild > element) ||
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIndex;
+        }
+      }
+
+      if (swap === null) {
+        return null;
+      }
+      this.values[index] = this.values[swap];
+      this.values[swap] = element;
+      index = swap;
+    }
+  }
+
+  // removes largest element from binary heap
+  extractMax() {
+    if (!this.values) {
+      return null;
+    }
+    const max = this.values[0];
+    const end = this.values.pop();
+    this.values[0] = end;
+    this.bubbleDown();
+    return max;
+  }
 }
 
 const heap = new MaxBinaryHeap();
 heap.insert(55);
 heap.insert(1);
 heap.insert(44);
+console.log(heap.values);
+console.log(heap.extractMax());
 console.log(heap.values);
 
 // Heaps can be represented as an array
