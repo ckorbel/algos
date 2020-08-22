@@ -1,5 +1,5 @@
-//Undirected graph
-//Adjancy List (instead of adjaceny matrix)
+// Undirected graph
+// Adjancy List (instead of adjaceny matrix)
 class Graph {
   constructor() {
     this.adjacenyList = {};
@@ -50,6 +50,30 @@ class Graph {
       return "vertex key not recognized";
     }
   }
+
+  // prioritizes moving as far away as possible from root node
+  // before moving on toward siblings
+  // just visits all vertexs/nodes connected to starting vertex
+  depthFirstTraversal(start) {
+    const visited = {};
+    const results = [];
+    const adjacenyList = this.adjacenyList;
+
+    (function dfs(vertex) {
+      if (!vertex) {
+        return null;
+      }
+
+      visited[vertex] = true;
+      results.push(vertex);
+      adjacenyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+    })(start);
+    return results;
+  }
 }
 
 const newGraph = new Graph();
@@ -63,7 +87,4 @@ newGraph.addEdges("San Jose", "LA");
 newGraph.addEdges("LA", "Hong Kong");
 newGraph.addEdges("San Jose", "Hong Kong");
 console.log(newGraph.adjacenyList);
-newGraph.removeVertex("LA");
-console.log(newGraph.adjacenyList);
-// newGraph.removeEdge('LA', 'San Jose');
-// console.log(newGraph.adjacenyList);
+console.log(newGraph.depthFirstTraversal("LA"));
