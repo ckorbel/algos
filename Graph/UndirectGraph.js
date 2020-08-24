@@ -78,7 +78,7 @@ class Graph {
   DFSiterative(start) {
     const visited = {};
     const results = [];
-    // use a stack
+    // use a stack array work well for a stack because you pop off the end
     const stack = [start];
     let current;
 
@@ -97,6 +97,29 @@ class Graph {
     }
     return results;
   }
+
+  // visit all connected neighbors first before going down.
+  breathFirst(start) {
+    const visited = {};
+    const results = [];
+    // ideally this would be a linked list but not feel like going through the boilerplate code
+    const queue = [];
+    visited[start] = true;
+    queue.push(start);
+    let current;
+    while (queue.length) {
+      current = queue.shift();
+      results.push(current);
+      this.adjacenyList[current].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+
+    return results;
+  }
 }
 
 const newGraph = new Graph();
@@ -110,5 +133,6 @@ newGraph.addEdges("San Jose", "LA");
 newGraph.addEdges("LA", "Hong Kong");
 newGraph.addEdges("San Jose", "Hong Kong");
 // console.log(newGraph.adjacenyList);
-console.log(newGraph.depthFirstTraversal("LA"));
-console.log(newGraph.DFSiterative("LA"));
+// console.log(newGraph.depthFirstTraversal("LA"));
+// console.log(newGraph.DFSiterative("LA"));
+console.log(newGraph.breathFirst("LA"));
