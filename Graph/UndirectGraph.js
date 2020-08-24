@@ -74,6 +74,29 @@ class Graph {
     })(start);
     return results;
   }
+
+  DFSiterative(start) {
+    const visited = {};
+    const results = [];
+    // use a stack
+    const stack = [start];
+    let current;
+
+    visited[start] = true;
+    while (stack.length) {
+      console.log(stack);
+      current = stack.pop();
+      results.push(current);
+
+      this.adjacenyList[current].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+    return results;
+  }
 }
 
 const newGraph = new Graph();
@@ -82,9 +105,10 @@ newGraph.addVertex("LA");
 newGraph.addVertex("Dallas");
 newGraph.addVertex("Hong Kong");
 newGraph.addVertex("Aspen");
-console.log(newGraph.adjacenyList);
+// console.log(newGraph.adjacenyList);
 newGraph.addEdges("San Jose", "LA");
 newGraph.addEdges("LA", "Hong Kong");
 newGraph.addEdges("San Jose", "Hong Kong");
-console.log(newGraph.adjacenyList);
+// console.log(newGraph.adjacenyList);
 console.log(newGraph.depthFirstTraversal("LA"));
+console.log(newGraph.DFSiterative("LA"));
