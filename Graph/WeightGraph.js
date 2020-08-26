@@ -1,3 +1,22 @@
+class SimplePriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+
+  enqueue(val, priority) {
+    this.values.push({ val, priority });
+    this.sort();
+  }
+
+  dequeue() {
+    return this.values.shift();
+  }
+
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
+}
+
 class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
@@ -22,8 +41,17 @@ const myG = new WeightedGraph();
 myG.addVertex("a");
 myG.addVertex("b");
 myG.addVertex("c");
+myG.addVertex("d");
+myG.addVertex("e");
+myG.addVertex("f");
 console.log(myG.adjacencyList);
-myG.addEdge("a", "b", 9);
-myG.addEdge("a", "c", 5);
-myG.addEdge("b", "c", 7);
+myG.addEdge("a", "b", 4);
+myG.addEdge("a", "c", 2);
+myG.addEdge("b", "e", 3);
+myG.addEdge("c", "d", 2);
+myG.addEdge("b", "f", 3);
+myG.addEdge("d", "e", 3);
+myG.addEdge("d", "f", 1);
+myG.addEdge("c", "f", 4);
+myG.addEdge("e", "f", 1);
 console.log(myG.adjacencyList);
