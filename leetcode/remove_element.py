@@ -9,3 +9,6 @@ def remove_element(nums, val):
 
 
 remove_element([3, 2, 2, 3], 3)
+
+
+# memoization

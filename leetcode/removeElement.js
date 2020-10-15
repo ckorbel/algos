@@ -1,4 +1,4 @@
-var removeElement = function (nums, val) {
+function removeElement(nums, val) {
   let counter = 0;
   while (counter < nums.length) {
     if (nums[counter] === val) {
@@ -8,6 +8,6 @@ var removeElement = function (nums, val) {
     }
   }
   return nums.length;
-};
+}
 
 console.log(removeElement([3, 2, 2, 3], 3));
