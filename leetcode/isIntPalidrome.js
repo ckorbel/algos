@@ -3,7 +3,6 @@ function isPalindrome(x) {
   let front = 0;
   let back = toString.length - 1;
   while (front <= back) {
-    console.log(toString[front], toString[back]);
     if (toString[front] === toString[back]) {
       front++;
       back--;
