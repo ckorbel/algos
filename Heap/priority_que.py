@@ -99,3 +99,7 @@ ER.enqueue("broken arm", 3)
 ER.enqueue("something crazy bad", 7)
 ER.print_vals()
 # ER.print_nodes()
+
+# log(N) for insertion and deletion or log(N) for dequeue and enqueue
+# search 0(n) however priority que aren't good data structures for search probably not BST for search
+# heaps rules make it so that they are always balanced so there's no worst case scenario where you have 0(n) w/ unbalanced trees
