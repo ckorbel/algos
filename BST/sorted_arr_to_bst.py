@@ -9,7 +9,7 @@ class Solution:
         if len(nums) < 1: 
             return None
         
-        mid_point = len(nums) // 2
+        mid_point = len(nums) // 2  ## python 3 needs // to not be a float 3.5
         root = TreeNode(nums[mid_point])
         root.left = self.sortedArrayToBST(nums[:mid_point])
         root.right = self.sortedArrayToBST(nums[mid_point + 1:])
