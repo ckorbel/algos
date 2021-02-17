@@ -17,6 +17,25 @@ const canConstruct = (target, strings, memo = {}) => {
   return false;
 };
 
+// tabulation version [true, false, false .... length of target word + 1]
+// 0(m^2 * n) m being the wordBank length n being length of target word
+const canConstruct = (target, wordBank) => {
+  const dp = new Array(target.length + 1).fill(false);
+  dp[0] = true;
+  for (let i = 0; i <= target.length; i++) {
+    // check for early exit
+    if (dp[target.length]) return true;
+    if (dp[i]) {
+      for (let word of wordBank) {
+        if (word === target.slice(i, i + word.length)) {
+          dp[i + word.length] = true;
+        }
+      }
+    }
+  }
+  return dp[target.length];
+};
+
 console.log(canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd"]));
 
 console.log(
