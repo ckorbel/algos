@@ -16,3 +16,7 @@ class Solution:
         output = []
         self.back_track(output, "", 0, 0, n)
         return output
+
+
+
+    # ((()))  => (()
