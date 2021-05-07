@@ -50,7 +50,8 @@ function orangesRotting(grid: number[][]): number {
         queue.push([x, y - 1]);
       }
     }
-
+    // outside the for loop queue needs to be emptied by for loop
+    // before a minute can be increased
     if (queue.length > 0) minute++;
   }
 
