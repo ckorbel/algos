@@ -1,4 +1,11 @@
 # Sets unorder, mutable, no duplicates
+# As an unordered collection type, set([8, 1, 6]) is equivalent to set([1, 6, 8]).
+
+# While it might be nicer to display the set contents in sorted order, that would make the repr() call more expensive.
+
+# Internally, the set type is implemented using a hash table: a hash function is used to separate items into a number of buckets to reduce the number of equality operations needed to check if an item is part of the set.
+
+# To produce the repr() output it just outputs the items from each bucket in turn, which is unlikely to be the sorted order.
 my_set = {1, 2, 3}
 set_one = set([1, 2, 3])
 set_two = set("hello")  # print {'h', 'l', 'o', 'e'}
