@@ -14,7 +14,7 @@ class Graph:
         if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
             # both are added because its unweight
             self.adjacency_list[vertex1].append(vertex2)
-            self.adjacency_list[vertex2]append(vertex1)
+            self.adjacency_list[vertex2].append(vertex1)
 
 
 new_graph = Graph()
