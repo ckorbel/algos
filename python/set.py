@@ -1,4 +1,5 @@
 # Sets unorder, mutable, no duplicates
+# basically seems like dictionary except just keys instead of key, value pairs
 # As an unordered collection type, set([8, 1, 6]) is equivalent to set([1, 6, 8]).
 
 # While it might be nicer to display the set contents in sorted order, that would make the repr() call more expensive.
