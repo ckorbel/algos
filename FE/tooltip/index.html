@@ -1,0 +1,40 @@
+<style>
+  span {
+    padding: 10px;
+    display: inline;
+  }
+
+  [title] {
+    position: relative;
+  }
+
+  [title]:hover:before {
+    background: #333;
+    top: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(title);
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: auto;
+    margin-top: 10px;
+  }
+
+  [title]:hover:after {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #333;
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+  }
+</style>
+
+<span class="dijitButtonContents" id="saveButton" title="Save as draft">
+  <span id="saveButton_label">Save</span>
+</span>
