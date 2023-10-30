@@ -1,7 +1,11 @@
+interface Memo {
+  [key: string]: string[][];
+}
+
 const allConstruct = (
   target: string,
   strings: string[],
-  memo: Record<string, string[][]> = {}
+  memo: Memo = {}
 ): string[][] => {
   if (target in memo) return memo[target];
   if (target === "") return [[]]; // subarray
