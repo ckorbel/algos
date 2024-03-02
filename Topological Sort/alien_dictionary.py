@@ -3,8 +3,10 @@
 
 class Solution:
     def alienOrder(self, words: List[str]) -> str:
+        #create a graph as adjacency list
         adj = { char:set() for word in words for char in word }
 
+        # create edges of the graph
         for i in range(len(words) - 1):
             word1, word2 = words[i], words[i + 1]
             min_length = min(len(word1), len(word2))
@@ -29,6 +31,7 @@ class Solution:
             visit[char] = False
             result.append(char)
         
+        # check for cycles if there is a cycle dictionary is invalid so return ""
         for char in adj: 
             if dfs(char): 
                 return ""
